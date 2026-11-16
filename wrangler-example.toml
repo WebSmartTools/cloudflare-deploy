@@ -1,0 +1,32 @@
+name = "my-site-api"
+main = "api-worker.js"
+compatibility_date = "2026-10-01"
+compatibility_flags = ["nodejs_compat"]
+
+# Route on the site domain. Without a route, the Worker only publishes
+# to its workers.dev subdomain and the /api/* paths on the real domain
+# stay dead.
+routes = [{ pattern = "example.com/api/*", zone_name = "example.com" }]
+
+# D1 database. Replace the example ID with your real database ID.
+# Never commit a real database ID into a shared example.
+[[d1_databases]]
+binding = "DB"
+database_name = "my-site-db"
+database_id = "11111111-2222-3333-4444-555555555555"
+
+# Rate limit bindings. The names are what the Worker code uses
+# (env.RL_API, env.RL_PSI). Replace the namespace IDs with yours.
+[[ratelimits]]
+name = "RL_API"
+namespace_id = "1001"
+simple = { limit = 120, period = 60 }
+
+[[ratelimits]]
+name = "RL_PSI"
+namespace_id = "1002"
+simple = { limit = 30, period = 60 }
+
+# Cron trigger. The Free plan allows 5 cron triggers.
+[triggers]
+crons = ["*/5 * * * *"]
