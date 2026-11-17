@@ -1,4 +1,5 @@
 # cloudflare-deploy
+[![Listed on mcpservers.org](https://mcpservers.org/badge.svg)](https://mcpservers.org/servers/websmarttools/cloudflare-deploy)
 
 Set up and deploy a site on Cloudflare Pages and Workers without the failures that cost a day each.
 
